@@ -35,20 +35,72 @@
             margin-top: 20px;
             font-size: 30px;
         }
+        .share-link {
+            margin-top: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="button" onclick="showResult()">どちらかを表示</button>
+        <button class="button" id="decisionButton" onclick="showResult()">どちらかを表示</button>
         <div class="result" id="result"></div>
+        <a id="shareLink" class="share-link" href="#" target="_blank" style="display:none;">結果を共有する</a>
     </div>
 
     <script>
         function showResult() {
+            const today = new Date().toISOString().slice(0, 10);
+            const savedDate = localStorage.getItem('lastPlayedDate');
+            const savedResult = localStorage.getItem('result');
+
+            if (savedDate === today) {
+                // 既に今日の結果が存在する場合
+                document.getElementById("result").innerText = `今日の結果: ${savedResult}`;
+                generateShareLink(savedResult);
+                document.getElementById("decisionButton").disabled = true;
+                return;
+            }
+
+            // 新しい結果を生成
             const options = ["制服", "ジャージ"];
             const randomIndex = Math.floor(Math.random() * options.length);
             const result = options[randomIndex];
-            document.getElementById("result").innerText = result;
+            document.getElementById("result").innerText = `今日の結果: ${result}`;
+
+            // 結果と日付を保存
+            localStorage.setItem('lastPlayedDate', today);
+            localStorage.setItem('result', result);
+
+            // シェアリンクを生成
+            generateShareLink(result);
+
+            // ボタンを無効化
+            document.getElementById("decisionButton").disabled = true;
+        }
+
+        function generateShareLink(result) {
+            const message = `明日の登校する服は、、、${result}でした！ https://sikovideo.github.io/nibuithi`;
+            const encodedMessage = encodeURIComponent(message);
+            const shareLink = `https://line.me/R/msg/text/?${encodedMessage}`;
+            document.getElementById("shareLink").href = shareLink;
+            document.getElementById("shareLink").innerText = "結果をLINEで共有する";
+            document.getElementById("shareLink").style.display = "block";
+        }
+
+        // ページ読み込み時にボタンの状態を確認
+        window.onload = function() {
+            const today = new Date().toISOString().slice(0, 10);
+            const savedDate = localStorage.getItem('lastPlayedDate');
+            const savedResult = localStorage.getItem('result');
+
+            if (savedDate === today && savedResult) {
+                document.getElementById("result").innerText = `今日の結果: ${savedResult}`;
+                generateShareLink(savedResult);
+                document.getElementById("decisionButton").disabled = true;
+            }
         }
     </script>
 </body>
