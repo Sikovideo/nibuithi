@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>にぶいち〜ジャージor制服〜</title>
+    <title>にぶいち〜びっちor清楚〜</title>
     <style>
         body {
-            background: url('背景.jpg') no-repeat center center fixed;
+            background: url('背景1.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -65,7 +65,7 @@
             }
 
             // 新しい結果を生成
-            const options = ["制服", "ジャージ"];
+            const options = ["びっち", "清楚"];
             const randomIndex = Math.floor(Math.random() * options.length);
             const result = options[randomIndex];
             document.getElementById("result").innerText = `今日の結果: ${result}`;
@@ -82,11 +82,11 @@
         }
 
         function generateShareLink(result) {
-            const message = `明日の登校する服は、、、${result}でした！ https://sikovideo.github.io/nibuithi`;
+            const message = `あなたは､､､${result}でした！ https://sikovideo.github.io/nibuithi`;
             const encodedMessage = encodeURIComponent(message);
             const shareLink = `https://line.me/R/msg/text/?${encodedMessage}`;
             document.getElementById("shareLink").href = shareLink;
-            document.getElementById("shareLink").innerText = "結果をLINEで共有する";
+            document.getElementById("shareLink").innerText = "結果を友達にLINEで共有！";
             document.getElementById("shareLink").style.display = "block";
         }
 
