@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>にぶいち〜ジャージor制服〜</title>
+    <style>
+        body {
+            background: url('背景.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="button" onclick="showResult()">どちらかを表示</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function showResult() {
+            const options = ["制服", "ジャージ"];
+            const randomIndex = Math.floor(Math.random() * options.length);
+            const result = options[randomIndex];
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>
